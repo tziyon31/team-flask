@@ -9,7 +9,7 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-
+# Person B
 @app.route('/<room>')
 def room(room):
     return render_template('index.html', room=room)
@@ -24,6 +24,16 @@ def chat(room):
     with open(filename, "a", encoding='utf-8') as f:
         f.write(message + "\n")
     return "", 204
+
+# Person A - Implemented by Judith
+@app.route('/api/chat/<room>', methods=['GET'])
+def get_chat(room):
+    filename = f"chat_{room}.txt"
+    if not os.path.exists(filename):
+        return "", 200
+    with open(filename, "r", encoding="utf-8") as f:
+        content = f.read()
+    return content, 200
+
 if __name__ == '__main__':
     app.run(debug=True)
-
