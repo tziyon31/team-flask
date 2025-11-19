@@ -9,11 +9,11 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-# Person B
+# # Implemented by Tziyon
 @app.route('/<room>')
 def room(room):
     return render_template('index.html', room=room)
-
+# # Implemented by Tziyon
 @app.route('/api/chat/<room>', methods=['POST'])
 def chat(room):
     username = request.form.get('username')
